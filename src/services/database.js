@@ -13,7 +13,6 @@ var root_directory = [...CURRENT_DIRECTORY_STRUCTURE]
 root_directory.pop()
 root_directory.pop()
 var db_directory = path.join(root_directory.join('/'), 'data', 'db')
-console.log(db_directory)
 
 // Connect to a database or create one if it doesn't exist yet.
 const db = Database(path.join(db_directory, "log.db"))
