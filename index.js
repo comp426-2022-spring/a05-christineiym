@@ -48,6 +48,9 @@ const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
 })
 
+// Serve static HTML files
+app.use(express.static('./public'));
+
 // Require coin and database SCRIPT files
 const coin = require('./src/controllers/mycontrollers.js')
 const db = require('./src/services/database.js')
