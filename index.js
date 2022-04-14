@@ -101,7 +101,7 @@ if (allArguments['log'] == true) {
 
 /***** API endpoints *****/
 //// Check endpoint ////
-app.get('/app/', (req, res) => {
+app.get('/app/', (req, res, next) => {
     // Respond with status 200
     res.statusCode = HTTP_STATUS_OK
     // Respond with status message "OK"
@@ -112,15 +112,15 @@ app.get('/app/', (req, res) => {
 
 //// Coin-flipping ////
 // One flip
-app.get('/app/flip', (req, res) => {
+app.get('/app/flip', (req, res, next) => {
     var flip = coin.coinFlip()
     res.status(HTTP_STATUS_OK).json({
         'flip': flip
     })
 })
 
-// Multiple flips
-app.get('/app/flips/:number', (req, res) => {
+// Multiple flips (using parameters)
+app.get('/app/flips/:number', (req, res, next) => {
     var coinFlipsResult = coin.coinFlips(req.params.number)
     var coinFlipsResultSummary = coin.countFlips(coinFlipsResult)
 
@@ -130,20 +130,33 @@ app.get('/app/flips/:number', (req, res) => {
     })
 });
 
-// Flip match against heads
-app.get('/app/flip/call/heads', (req, res) => {
-    res.status(HTTP_STATUS_OK).json(coin.flipACoin(HEADS))
+// Multiple flips (using body)
+app.post('/app/flips/coins/', (req, res, next) => {
+    var coinFlipsResult = coin.coinFlips(req.body.number)
+    var coinFlipsResultSummary = coin.countFlips(coinFlipsResult)
+
+    res.status(HTTP_STATUS_OK).json({
+        'raw': coinFlipsResult,
+        'summary': coinFlipsResultSummary
+    })
+});
+
+// Flip match (using parameters)
+app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
+    const game = flipACoin(req.params.guess)
+    res.status(HTTP_STATUS_OK).json(game)
 })
 
-// Flip match against tails
-app.get('/app/flip/call/tails', (req, res) => {
-    res.status(HTTP_STATUS_OK).json(coin.flipACoin(TAILS))
+// Flip match (using body)
+app.post('/app/flip/call/', (req, res, next) => {
+    const game = flipACoin(req.body.guess)
+    res.status(HTTP_STATUS_OK).json(game)
 })
 
 //// Logging and error testing, if debug is true ////
 if (allArguments['debug'] == true) {
     // READ a list of access log records (HTTP method GET) at endpoint /app/log/access
-    app.get("/app/log/access", (req, res) => {
+    app.get("/app/log/access", (req, res, next) => {
         try {
             const stmt = db.prepare('SELECT * FROM accesslogs').all()
             res.status(HTTP_STATUS_OK).json(stmt)
@@ -154,13 +167,13 @@ if (allArguments['debug'] == true) {
 
     // Error test (taken with modification from thi link:
     // http://expressjs.com/en/guide/error-handling.html)
-    app.get('/app/error', (req, res) => {
+    app.get('/app/error', (req, res, next) => {
         throw new Error('Error test successful.') // Express will catch this on its own.
     })
 }
 
 //// Default response for any request not addressed by the defined endpoints ////
-app.use(function (req, res) {
+app.use(function (req, res, next) {
     res.json({ "message": "Endpoint not found. (404)" });
     res.status(HTTP_STATUS_NOT_FOUND);
 });
