@@ -36,7 +36,7 @@
     <button id="guessnav" onclick="focusDiv('guess')">Guess the result</button>
   </nav>
   <div id="home" class="active">
-    <h1>Instructions:</h1>
+    <h1>Instructions</h1>
     <p>Play games with a coin! The games currently available through the top buttons are as follows:</p>
     <ul>
       <li>Flip one coin</li>
@@ -45,27 +45,34 @@
     </ul>
   </div>
   <div id="single" class="hidden">
-    <!-- A "coin" button -->
-    <button id="coin">Flip?</button>
-    <!-- A status paragraph -->
-    <p id="active"></p>
+    <h1>Flip One Coin</h1>
+    <!-- A "coin" button to trigger the flips-->
+    <button id="coin" onclick="flipCoin()">Flip?</button> <!-- A reset button may be added later -->
+    <br>
+    <!-- An image of a US quarter (North Carolina variant) -->
+    <img src="assets/img/coin.png" id="quarter" class="bigcoin">
     <!-- A result paragraph-->
     <p>Result: <span id="result"></span></p>
-    <!-- An image of a US quarter (North Carolina variant) -->
-    <img src="img/coin.jpg" id="quarter" class="bigcoin">
-
-    <script>
-      // Button coin flip element
-      const coin = document.getElementById("coin")
-      // Add event listener for coin button
-      coin.addEventListener("click", flipCoin)
-    </script>
   </div>
   <div id="multi" class="hidden">
-    <p>Flip Multiple Coins</p>
+    <h1>Flip Multiple Coins</h1>
+    <form action="flipCoins()">
+      <label for="numberCoins">Enter the number of coins to flip: </label>
+      <input type="number" id="numberCoins" name="numberCoins">
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+    <!-- A "coins" button to trigger the flips-->
+    <button id="coins" onclick="flipCoins()">Flip?</button> <!-- A reset button may be added later -->
+    <br>
+    <!-- An image of a US quarter (North Carolina variant) -->
+    <img src="assets/img/coin.png" id="quarter" class="bigcoin">
+    <!-- A result paragraph-->
+    <p>Result: <span id="result"></span></p>
   </div>
   <div id="guess" class="hidden">
-    <p>Guess Flip</p>
+    <h1>Guess the Result of a Coin Flip</h1>
+    <p>guessing</p>
   </div>
 </body>
 
