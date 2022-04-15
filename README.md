@@ -54,6 +54,8 @@ node server.js [options]
 
 ### /app/ (GET)
 
+Check connection to the API.
+
 #### Request cURL
 
 ```
@@ -80,6 +82,8 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flip/ (GET)
+
+Flip one coin and obtain the flip result (heads/tails).
 
 _Duplicate of /app/flip/coin/ (GET)_
 
@@ -110,6 +114,10 @@ Keep-Alive: timeout=5
 
 ### /app/flips/:number/ (GET)
 
+Flip the number of coins specified in the request parameters and obtain:
+- The raw results listing the flips.
+- The result summary with the number of flips resulting in heads and the number of flips resulting in tails.
+
 #### Request cURL
 
 ```
@@ -137,47 +145,73 @@ Keep-Alive: timeout=5
 
 ### /app/flip/coin/ (GET)
 
+Flip one coin and obtain the flip result (heads/tails).
+
 _Duplicate of /app/flip/ (GET)_
 
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/coin/
 ```
 
 #### Response body
 
 ```
-
+{"flip":"heads"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 16
+ETag: W/"10-VYm8Bk1/RW8RGhDXdTwBYk6lbGE"
+Date: Fri, 15 Apr 2022 21:33:53 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/:guess/ (GET)
 
+Perform a flip match with the call (heads/tails) specified in the request parameters and obtain:
+- The call (heads/tails).
+- The actual flip (heads/tails).
+- The result (win/lose).
+
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/call/tails/
 ```
 
 #### Response body
 
 ```
-
+{"call":"tails","flip":"heads","result":"lose"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 47
+ETag: W/"2f-JOa34pahI0LRWI9nHfi+YGLHNg8"
+Date: Fri, 15 Apr 2022 21:44:31 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/ (POST)
+
+Perform a flip match with the call (heads/tails) specified in the request body and obtain:
+- The call (heads/tails).
+- The actual flip (heads/tails).
+- The result (win/lose).
 
 #### Request cURL
 
@@ -205,6 +239,10 @@ Keep-Alive: timeout=5
 ```
 
 ### /app/flip/coins/ (POST)
+
+Flip the number of coins specified in the request body and obtain:
+- The raw results listing the flips.
+- The result summary with the number of flips resulting in heads and the number of flips resulting in tails.
 
 #### Request cURL
 
