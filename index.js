@@ -102,12 +102,9 @@ if (allArguments['log'] == true) {
 /***** API endpoints *****/
 //// Check endpoint ////
 app.get('/app/', (req, res, next) => {
-    // Respond with status 200
-    res.statusCode = HTTP_STATUS_OK
-    // Respond with status message "OK"
-    res.statusMessage = 'OK'
-    res.writeHead(res.statusCode, { 'Content-Type': CONTENT_TYPE_TEXT_PLAIN })
-    res.end(res.statusCode + ' ' + res.statusMessage)
+    res.status(HTTP_STATUS_OK).json({
+        'message': "Your API works! (" + HTTP_STATUS_OK + ")"
+    })
 });
 
 //// Coin-flipping ////
