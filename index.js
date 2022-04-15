@@ -143,13 +143,13 @@ app.post('/app/flips/coins/', (req, res, next) => {
 
 // Flip match (using parameters)
 app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
-    const game = flipACoin(req.params.guess)
+    const game = coin.flipACoin(req.params.guess)
     res.status(HTTP_STATUS_OK).json(game)
 })
 
 // Flip match (using body)
 app.post('/app/flip/call/', (req, res, next) => {
-    const game = flipACoin(req.body.guess)
+    const game = coin.flipACoin(req.body.guess)
     res.status(HTTP_STATUS_OK).json(game)
 })
 

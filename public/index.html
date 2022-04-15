@@ -67,7 +67,7 @@
 
     <div id="resultTables" class="hidden">
       <!-- A table summarizing the results-->
-      <h2>Result summary</h2>
+      <h2>Result Summary</h2>
       <table>
         <thead>
           <tr>
@@ -88,7 +88,7 @@
       </table>
 
       <!-- A table detailing the results-->
-      <h2>Result details</h2>
+      <h2>Result Details</h2>
       <table>
         <thead>
           <tr>
@@ -105,7 +105,27 @@
   </div>
   <div id="guess" class="hidden">
     <h1>Guess the Result of a Coin Flip</h1>
-    <p>guessing</p>
+
+    <h2>Pick your guess:</h2>
+    <button id="guessHeads" onclick="guessFlip('heads')">I pick HEADS!</button>
+    <button id="guessTails" onclick="guessFlip('tails')">I pick TAILS!</button>
+
+    <h2>Results</h2>
+
+    <h3>Your Pick</h3>
+    <!-- Text of pick -->
+    <p><span id="guessPickText"></span></p>
+    <!-- Image representation of pick -->
+    <img src="assets/img/coin.png" id="guessPickImage" class="smallcoin">
+
+    <h3>Actual Result</h3>
+    <!-- Text of actual result -->
+    <p><span id="guessActualResultText"></span></p>
+    <!-- Image representation of pick -->
+    <img src="assets/img/coin.png" id="guessActualResultImage" class="smallcoin">
+
+    <h3>Did you win or lose?</h3>
+    <p><span id="guessWinOrLoss">Pick between heads or tails to see!</span></p>
   </div>
 </body>
 

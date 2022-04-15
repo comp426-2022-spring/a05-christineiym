@@ -76,10 +76,39 @@ function flipCoins() {
                 // Append the current row to the table body.
                 detailsTableBody.appendChild(currentRow);
             }
-            
+
             // Show results
             document.getElementById("resultTables").setAttribute("class", "active");
         })
 }
 
 // Guess a flip by clicking either heads or tails button
+function guessFlip(guess) {
+    console.log(guess);
+    fetch('http://localhost:5000/app/flip/call', {
+        body: JSON.stringify({
+            "guess": guess
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "post"
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (result) {
+            console.log(result);
+
+            // Display the pick (text and image).
+            document.getElementById("guessPickText").innerHTML = result.call;
+            document.getElementById("guessPickImage").setAttribute("src", "assets/img/" + result.call + ".png")
+
+            // Display the actual result (text and image).
+            document.getElementById("guessActualResultText").innerHTML = result.flip;
+            document.getElementById("guessActualResultImage").setAttribute("src", "assets/img/" + result.flip + ".png");
+
+            // Display if the person using the site won or lost.
+            document.getElementById("guessWinOrLoss").innerHTML = "You " + result.result + ".";
+        })
+}
