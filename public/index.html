@@ -49,26 +49,59 @@
     <!-- A "coin" button to trigger the flips-->
     <button id="coin" onclick="flipCoin()">Flip?</button> <!-- A reset button may be added later -->
     <br>
+    <!-- A result paragraph-->
+    <p>Result: <span id="flipResult"></span></p>
     <!-- An image of a US quarter (North Carolina variant) -->
     <img src="assets/img/coin.png" id="quarter" class="bigcoin">
-    <!-- A result paragraph-->
-    <p>Result: <span id="result"></span></p>
   </div>
   <div id="multi" class="hidden">
     <h1>Flip Multiple Coins</h1>
-    <form action="flipCoins()">
+
+    <!-- A form to input the number of coins desired and to trigger the flips-->
+    <form action="javascript:void(0);" method="post" onsubmit="flipCoins()">
       <label for="numberCoins">Enter the number of coins to flip: </label>
       <input type="number" id="numberCoins" name="numberCoins">
       <br>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Flip Coins!">
     </form>
-    <!-- A "coins" button to trigger the flips-->
-    <button id="coins" onclick="flipCoins()">Flip?</button> <!-- A reset button may be added later -->
-    <br>
-    <!-- An image of a US quarter (North Carolina variant) -->
-    <img src="assets/img/coin.png" id="quarter" class="bigcoin">
-    <!-- A result paragraph-->
-    <p>Result: <span id="result"></span></p>
+
+    <div id="resultTables" class="hidden">
+      <!-- A table summarizing the results-->
+      <h2>Result summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Result</th>
+            <th scope="col">Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Heads</td>
+            <td><span id="summaryHeads"></span></td>
+          </tr>
+          <tr>
+            <td>Tails</td>
+            <td><span id="summaryTails"></span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- A table detailing the results-->
+      <h2>Result details</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Result</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <span id="details"></span>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div id="guess" class="hidden">
     <h1>Guess the Result of a Coin Flip</h1>
