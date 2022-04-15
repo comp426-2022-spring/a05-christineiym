@@ -81,22 +81,31 @@ Keep-Alive: timeout=5
 
 ### /app/flip/ (GET)
 
+_Duplicate of /app/flip/coin/ (GET)_
+
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/
 ```
 
 #### Response body
 
 ```
-
+{"flip":"heads"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 16
+ETag: W/"10-VYm8Bk1/RW8RGhDXdTwBYk6lbGE"
+Date: Fri, 15 Apr 2022 21:21:53 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
@@ -104,22 +113,31 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flips/5/
 ```
 
 #### Response body
 
 ```
-
+{"raw":["tails","heads","tails","heads","tails"],"summary":{"heads":2,"tails":3}}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 81
+ETag: W/"51-IWzVVZssN58fXvSJkEM6w8IgpU8"
+Date: Fri, 15 Apr 2022 21:23:51 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/coin/ (GET)
+
+_Duplicate of /app/flip/ (GET)_
 
 #### Request cURL
 

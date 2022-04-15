@@ -116,6 +116,14 @@ app.get('/app/flip', (req, res, next) => {
     })
 })
 
+// Alternate one flip
+app.get('/app/flip/coin/', (req, res, next) => {
+    var flip = coin.coinFlip()
+    res.status(HTTP_STATUS_OK).json({
+        'flip': flip
+    })
+})
+
 // Multiple flips (using parameters)
 app.get('/app/flips/:number', (req, res, next) => {
     var coinFlipsResult = coin.coinFlips(req.params.number)
