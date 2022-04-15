@@ -376,88 +376,132 @@ Keep-Alive: timeout=5
 
 ### /app/user/login/ (POST)
 
+Login the specified user to the website using the username and password provided in the request body.
+
+Obtain the user's username and the login status (success/failure).
+
 _Not yet implemented_
 
 #### Request cURL
 
 ```
-
+curl -X POST -H 'Content-Type: application/json' -d '{"username":"testuser","password":"testpassword"}' http://localhost:5000/app/user/login/
 ```
 
 #### Response body
 
 ```
-
+{"username":"testuser","login status":"success"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 48
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpFElRc"
+Date: Thu, 07 Apr 2022 16:30:07 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/user/new/ (POST)
 
+Create the specified user in the website using the username and password provided in the request body.
+
+Obtain the user's username and the status of user creation (success/failure).
+
 _Not yet implemented_
 
 #### Request cURL
 
 ```
-
+curl -X POST -H 'Content-Type: application/json' -d '{"username":"testuser","password":"testpassword"}' http://localhost:5000/app/user/new/
 ```
 
 #### Response body
 
 ```
-
+{"username":"testuser","user creation status":"success"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpFElRc"
+Date: Thu, 07 Apr 2022 16:30:07 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/user/update/ (PATCH)
 
+Change the password for the specified user using the username and new password provided in the request body.
+
+Obtain the user's username and the status of user update (success/failure).
+
 _Not yet implemented_
 
 #### Request cURL
 
 ```
-
+curl -X PATCH -H 'Content-Type: application/json' -d '{"username":"testuser","password":"newtestpassword"}' http://localhost:5000/app/user/update/
 ```
 
 #### Response body
 
 ```
-
+{"username":"testuser","user update status":"success"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 54
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpFElRc"
+Date: Thu, 07 Apr 2022 16:30:07 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/user/delete/ (DELETE)
 
+Delete the specified user from the website (given the username and password provided in the request body).
+
+Obtain the user's username and the status of user deletion (success/failure).
+
 _Not yet implemented_
 
 #### Request cURL
 
 ```
-
+curl -X DELETE -H 'Content-Type: application/json' -d '{"username":"testuser","password":"testpassword"}' http://localhost:5000/app/user/delete/
 ```
 
 #### Response body
 
 ```
-
+{"username":"testuser","user deletion status":"success"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 56
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpFElRc"
+Date: Thu, 07 Apr 2022 16:30:07 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
