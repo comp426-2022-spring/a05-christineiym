@@ -1,13 +1,13 @@
 // Focus div based on nav button click
 function focusDiv(divname) {
-    // set active element(s) to be hidden
+    // Set active element(s) to be hidden
     var activeDivsCollection = document.getElementsByClassName("active");
     var activeDivsArr = Array.from(activeDivsCollection)
     activeDivsArr.forEach(function (currentdiv) {
         currentdiv.setAttribute("class", "hidden");
     })
 
-    // set the div to focus on to be active
+    // Set the div to focus on to be active
     document.getElementById(divname).setAttribute("class", "active");
 }
 
@@ -44,10 +44,39 @@ function flipCoins() {
         })
         .then(function (result) {
             console.log(result);
+
+            // Put summary results into the summary table.
             document.getElementById("summaryHeads").innerHTML = result.summary.heads;
             document.getElementById("summaryTails").innerHTML = result.summary.tails;
-            // document.getElementById("quarter").setAttribute("src", "assets/img/" + result.flip + ".png");
 
+            // Graphically display all results in the details table.
+            var detailsTableBody = document.getElementById("details");
+            for (var i = 0; i < result.raw.length; i++) {
+                // Create a new row.
+                var currentRow = document.createElement("tr");
+
+                // Add the flip number to the table row.
+                var currNumber = document.createElement("td");
+                currNumber.innerHTML = i + 1;
+                currentRow.appendChild(currNumber);
+
+                // Add the flip result to the table row.
+                var currResult = document.createElement("td");
+                currResult.innerHTML = result.raw[i];
+                currentRow.appendChild(currResult);
+
+                // Add the flip number to the table row.
+                var currImageCell = document.createElement("td");
+                var currImageActual = document.createElement("img");
+                currImageActual.setAttribute("src", "assets/img/" + result.raw[i] + ".png");
+                currImageActual.setAttribute("class", "smallcoin");
+                currImageCell.appendChild(currImageActual);
+                currentRow.appendChild(currImageCell);
+
+                // Append the current row to the table body.
+                detailsTableBody.appendChild(currentRow);
+            }
+            
             // Show results
             document.getElementById("resultTables").setAttribute("class", "active");
         })
