@@ -108,55 +108,7 @@ app.get('/app/', (req, res, next) => {
 });
 
 //// Coin-flipping ////
-// One flip
-app.get('/app/flip', (req, res, next) => {
-    var flip = coin.coinFlip()
-    res.status(HTTP_STATUS_OK).json({
-        'flip': flip
-    })
-})
-
-// Alternate one flip
-app.get('/app/flip/coin/', (req, res, next) => {
-    var flip = coin.coinFlip()
-    res.status(HTTP_STATUS_OK).json({
-        'flip': flip
-    })
-})
-
-// Multiple flips (using parameters)
-app.get('/app/flips/:number', (req, res, next) => {
-    var coinFlipsResult = coin.coinFlips(req.params.number)
-    var coinFlipsResultSummary = coin.countFlips(coinFlipsResult)
-
-    res.status(HTTP_STATUS_OK).json({
-        'raw': coinFlipsResult,
-        'summary': coinFlipsResultSummary
-    })
-});
-
-// Multiple flips (using body)
-app.post('/app/flips/coins/', (req, res, next) => {
-    var coinFlipsResult = coin.coinFlips(req.body.number)
-    var coinFlipsResultSummary = coin.countFlips(coinFlipsResult)
-
-    res.status(HTTP_STATUS_OK).json({
-        'raw': coinFlipsResult,
-        'summary': coinFlipsResultSummary
-    })
-});
-
-// Flip match (using parameters)
-app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
-    const game = coin.flipACoin(req.params.guess)
-    res.status(HTTP_STATUS_OK).json(game)
-})
-
-// Flip match (using body)
-app.post('/app/flip/call/', (req, res, next) => {
-    const game = coin.flipACoin(req.body.guess)
-    res.status(HTTP_STATUS_OK).json(game)
-})
+app.use(require("./routes/flipRoutes"))
 
 //// Logging and error testing, if debug is true ////
 if (allArguments['debug'] == true) {
