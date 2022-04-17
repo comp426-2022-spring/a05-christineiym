@@ -51,8 +51,7 @@ const server = app.listen(port, () => {
 // Serve static HTML files
 app.use(express.static('./public'));
 
-// Require coin and database SCRIPT files
-const coin = require('./src/controllers/mycontrollers.js')
+// Require database SCRIPT file
 const db = require('./src/services/database.js')
 
 // Make Express use its own built-in body parser for both urlencoded and JSON body data.
@@ -108,25 +107,11 @@ app.get('/app/', (req, res, next) => {
 });
 
 //// Coin-flipping ////
-app.use(require("./routes/flipRoutes"))
+app.use(require("./src/routes/flipRoutes"))
 
 //// Logging and error testing, if debug is true ////
 if (allArguments['debug'] == true) {
-    // READ a list of access log records (HTTP method GET) at endpoint /app/log/access
-    app.get("/app/log/access", (req, res, next) => {
-        try {
-            const stmt = db.prepare('SELECT * FROM accesslogs').all()
-            res.status(HTTP_STATUS_OK).json(stmt)
-        } catch {
-            console.error(e)
-        }
-    });
-
-    // Error test (taken with modification from thi link:
-    // http://expressjs.com/en/guide/error-handling.html)
-    app.get('/app/error', (req, res, next) => {
-        throw new Error('Error test successful.') // Express will catch this on its own.
-    })
+    app.use(require("./src/routes/debugRoutes"))
 }
 
 //// Default response for any request not addressed by the defined endpoints ////

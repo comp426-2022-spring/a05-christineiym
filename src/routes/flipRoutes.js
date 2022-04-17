@@ -2,6 +2,9 @@
 const express = require("express");
 const HTTP_STATUS_OK = 200;
 
+// Require coin SCRIPT file
+const coin = require('../controllers/mycontrollers.js')
+
 // flipRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware.
