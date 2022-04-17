@@ -7,9 +7,6 @@ const EXIT_SUCCESS = 0
 const DEFAULT_PORT = 3000
 const HTTP_STATUS_OK = 200
 const HTTP_STATUS_NOT_FOUND = 404
-const CONTENT_TYPE_TEXT_PLAIN = 'text/plain'
-const HEADS = 'heads'
-const TAILS = 'tails'
 
 // Require minimist module to process arguments.
 const minimist = require('minimist')
@@ -50,9 +47,6 @@ const server = app.listen(port, () => {
 
 // Serve static HTML files
 app.use(express.static('./public'));
-
-// Require database SCRIPT file
-const db = require('./src/services/database.js')
 
 // Make Express use its own built-in body parser for both urlencoded and JSON body data.
 app.use(express.urlencoded({ extended: true }));
