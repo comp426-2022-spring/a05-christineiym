@@ -59,31 +59,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Logging middleware
-app.use((req, res, next) => {
-    let logdata = {
-        remoteaddr: req.ip ?? null,
-        remoteuser: req.user ?? null,
-        time: Date.now() ?? null,
-        method: req.method ?? null,
-        url: req.url ?? null,
-        protocol: req.protocol ?? null,
-        httpversion: req.httpVersion ?? null,
-        secure: req.secure.toString() ?? null, // TODO: is this ok?
-        status: res.statusCode ?? null,
-        referer: req.headers['referer'] ?? null,
-        useragent: req.headers['user-agent'] ?? null
-    }
-
-    const stmt = db.prepare(`INSERT INTO accesslogs (remoteaddr, remoteuser, time, 
-        method, url, protocol, httpversion, secure, status, referer, useragent) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`)
-
-    const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time,
-        logdata.method, logdata.url, logdata.protocol,
-        logdata.httpversion, logdata.secure, logdata.status,
-        logdata.referer, logdata.useragent)
-    next()
-})
+app.use(require('./src/middleware/logging.js'))
 
 // Additional (combined format) logging middleware, if log is true
 if (allArguments['log'] == true) {
@@ -99,22 +75,22 @@ if (allArguments['log'] == true) {
 
 
 /***** API endpoints *****/
-//// Check endpoint ////
+// Check endpoint
 app.get('/app/', (req, res, next) => {
     res.status(HTTP_STATUS_OK).json({
         'message': "Your API works! (" + HTTP_STATUS_OK + ")"
     })
 });
 
-//// Coin-flipping ////
+//Coin-flipping
 app.use(require("./src/routes/flipRoutes"))
 
-//// Logging and error testing, if debug is true ////
+// Logging and error testing, if debug is true
 if (allArguments['debug'] == true) {
     app.use(require("./src/routes/debugRoutes"))
 }
 
-//// Default response for any request not addressed by the defined endpoints ////
+// Default response for any request not addressed by the defined endpoints
 app.use(function (req, res, next) {
     res.json({ "message": "Endpoint not found. (404)" });
     res.status(HTTP_STATUS_NOT_FOUND);
