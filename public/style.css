@@ -7,9 +7,14 @@ div.active {
 }
 
 img.bigcoin {
-  width: 50px;
+  width: 250px;
 }
 
 img.smallcoin {
   width: 50px;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding: 5px;
 }
